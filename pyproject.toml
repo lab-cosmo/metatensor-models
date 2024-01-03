@@ -1,0 +1,88 @@
+[project]
+name = "metatensor-models"
+dynamic = ["version"]
+requires-python = ">=3.7"
+
+readme = "README.md"
+license = {text = "BSD-3-Clause"}
+description = "" # TODO
+authors = [{name = "metatensor-models developers"}]
+
+dependencies = [
+    "ase",
+    "torch",
+    "hydra-core",
+    "rascaline-torch @ git+https://github.com/luthaf/rascaline#subdirectory=python/rascaline-torch",
+    "metatensor-core",
+    "metatensor-operations",
+    "metatensor-torch",
+]
+
+keywords = [] # TODO
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+# homepage = "TODO"
+# documentation = "TODO"
+repository = "https://github.com/lab-cosmo/metatensor-models"
+# changelog = "TODO"
+
+[project.scripts]
+metatensor-models = "metatensor.models.__main__:main"
+
+### ======================================================================== ###
+
+[build-system]
+requires = [
+    "setuptools >= 68",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+soap-bpnn = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "metatensor.models.__version__"}
+
+[tool.coverage.report]
+include = [
+    "src/metatensor/models/*"
+]
+
+[tool.coverage.xml]
+output = 'tests/coverage.xml'
+
+[tool.pytest.ini_options]
+python_files = ["*.py"]
+testpaths = ["tests"]
+
+[tool.isort]
+skip = "__init__.py"
+profile = "black"
+line_length = 88
+indent = 4
+include_trailing_comma = true
+lines_after_imports = 2
+known_first_party = "metatensor-models"
+
+[tool.mypy]
+ignore_missing_imports = true
