@@ -9,6 +9,6 @@ module.
 .. toctree::
    :maxdepth: 1
 
-   adding-models
+   adding-models/index
    cli/index
    utils/index

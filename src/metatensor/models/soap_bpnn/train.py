@@ -46,7 +46,7 @@ def train(
     continue_from: Optional[str] = None,
     output_dir: str = ".",
     device_str: str = "cpu",
-):
+) -> torch.nn.Module:
     # Create the model:
     if continue_from is None:
         model = Model(
