@@ -1,3 +1,4 @@
+import itertools
 import warnings
 from typing import Dict, List, Tuple, Union
 
@@ -58,7 +59,7 @@ def compute_model_loss(
     if not set(targets.keys()).issubset(outputs_capabilities.keys()):
         raise ValueError("Not all targets are within the model's capabilities.")
 
-    # Infer move systems and targets to the same device:
+    device = next(itertools.chain(model.parameters(), model.buffers())).device
     systems = [system.to(device=device) for system in systems]
     targets = {key: target.to(device=device) for key, target in targets.items()}
 
