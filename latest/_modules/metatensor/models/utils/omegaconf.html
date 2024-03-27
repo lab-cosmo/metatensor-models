@@ -1,0 +1,620 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>metatensor.models.utils.omegaconf - metatensor-models 2023.11.29 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/brands.min.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">metatensor-models 2023.11.29 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">metatensor-models 2023.11.29 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../getting-started/index.html">Getting started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting-started/usage.html">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting-started/custom_dataset_conf.html">Customize a Dataset Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting-started/advanced_base_config.html">Advanced Base Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting-started/override.html">Override Architecture’s Default Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../getting-started/checkpoints.html">Checkpoints</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/ase/run_ase.html">Running molecular dynamics with ASE</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../architectures/index.html">Available Architectures</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Available Architectures</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../architectures/alchemical-model.html">Alchemical Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../architectures/soap-bpnn.html">SOAP-BPNN</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../dev-docs/index.html">Developer documentation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Developer documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../dev-docs/adding-models.html">Adding new models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../dev-docs/architecture-life-cycle.html">Life Cycle of an Architecture</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../dev-docs/cli/index.html">CLI API</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of CLI API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/cli/train.html">Train</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/cli/eval.html">Eval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/cli/formatter.html">formatter</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../dev-docs/utils/index.html">Utility API</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Utility API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../dev-docs/utils/data/index.html">Data</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Data</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../dev-docs/utils/data/combine_dataloaders.html">Combining dataloaders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../dev-docs/utils/data/dataset.html">Dataset</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../dev-docs/utils/data/readers/index.html">system and Target data Readers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of system and Target data Readers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../dev-docs/utils/data/readers/systems.html">system Readers</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../dev-docs/utils/data/readers/targets.html">Target data Readers</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../dev-docs/utils/data/writers.html">Target data Writers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../dev-docs/utils/data/systems_to_ase.html">Converting Systems to ASE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/composition.html">Composition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/devices.html">Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/errors.html">Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/evaluate_model.html">Evaluating a model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/extract_targets.html">Extract targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/io.html">IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/loss.html">Loss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/merge_capabilities.html">Merge capabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/metrics.html">Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/neighbors_lists.html">Neighbor lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/omegaconf.html">Custom omegaconf functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../dev-docs/utils/output_gradient.html">Output gradient</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for metatensor.models.utils.omegaconf</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">Container</span><span class="p">,</span> <span class="n">DictConfig</span><span class="p">,</span> <span class="n">ListConfig</span><span class="p">,</span> <span class="n">OmegaConf</span>
+<span class="kn">from</span> <span class="nn">omegaconf.basecontainer</span> <span class="kn">import</span> <span class="n">BaseContainer</span>
+
+
+<div class="viewcode-block" id="file_format">
+<a class="viewcode-back" href="../../../../dev-docs/utils/omegaconf.html#metatensor.models.utils.omegaconf.file_format">[docs]</a>
+<span class="k">def</span> <span class="nf">file_format</span><span class="p">(</span><span class="n">_parent_</span><span class="p">:</span> <span class="n">Container</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom OmegaConf resolver to find the file format.</span>
+
+<span class="sd">    File format is obtained based on the suffix of the ``read_from`` field in the same</span>
+<span class="sd">    section.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">_parent_</span><span class="p">[</span><span class="s2">&quot;read_from&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">suffix</span></div>
+
+
+
+<div class="viewcode-block" id="default_precision">
+<a class="viewcode-back" href="../../../../dev-docs/utils/omegaconf.html#metatensor.models.utils.omegaconf.default_precision">[docs]</a>
+<span class="k">def</span> <span class="nf">default_precision</span><span class="p">(</span><span class="n">_root_</span><span class="p">:</span> <span class="n">BaseContainer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom OmegaConf resolver to find the default precision of an architecture.</span>
+
+<span class="sd">    File format is obtained based on the architecture name and its first entry in the</span>
+<span class="sd">    ``supported_dtypes`` list.&quot;&quot;&quot;</span>
+
+    <span class="n">architecture_name</span> <span class="o">=</span> <span class="n">_root_</span><span class="p">[</span><span class="s2">&quot;architecture&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">architecture</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;metatensor.models.</span><span class="si">{</span><span class="n">architecture_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">architecture_capabilities</span> <span class="o">=</span> <span class="n">architecture</span><span class="o">.</span><span class="n">__ARCHITECTURE_CAPABILITIES__</span>
+
+    <span class="c1"># desired `dtype` is the first entry</span>
+    <span class="n">default_dtype</span> <span class="o">=</span> <span class="n">architecture_capabilities</span><span class="p">[</span><span class="s2">&quot;supported_dtypes&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># base_precision has to be a integere and not a torch dtype</span>
+    <span class="k">if</span> <span class="n">default_dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="mi">64</span>
+    <span class="k">elif</span> <span class="n">default_dtype</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">32</span>
+    <span class="k">elif</span> <span class="n">default_dtype</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">16</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;architectures `default_dtype` (</span><span class="si">{</span><span class="n">default_dtype</span><span class="si">}</span><span class="s2">) refers to an unknown &quot;</span>
+            <span class="s2">&quot;torch dtype. This should not happen.&quot;</span>
+        <span class="p">)</span></div>
+
+
+
+<span class="c1"># Register custom resolvers</span>
+<span class="n">OmegaConf</span><span class="o">.</span><span class="n">register_new_resolver</span><span class="p">(</span><span class="s2">&quot;file_format&quot;</span><span class="p">,</span> <span class="n">file_format</span><span class="p">)</span>
+<span class="n">OmegaConf</span><span class="o">.</span><span class="n">register_new_resolver</span><span class="p">(</span><span class="s2">&quot;default_precision&quot;</span><span class="p">,</span> <span class="n">default_precision</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_resolve_single_str</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DictConfig</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span><span class="s2">&quot;read_from&quot;</span><span class="p">:</span> <span class="n">config</span><span class="p">})</span>
+
+
+<span class="c1"># BASE CONFIGURATIONS</span>
+<span class="n">CONF_SYSTEMS</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;read_from&quot;</span><span class="p">:</span> <span class="s2">&quot;${..read_from}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;file_format&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{file_format:}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;length_unit&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">CONF_TARGET_FIELDS</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="s2">&quot;energy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;read_from&quot;</span><span class="p">:</span> <span class="s2">&quot;${...systems.read_from}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;file_format&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{file_format:}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">CONF_GRADIENTS</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">({</span><span class="s2">&quot;forces&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;stress&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;virial&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">CONF_GRADIENT</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;read_from&quot;</span><span class="p">:</span> <span class="s2">&quot;${..read_from}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;file_format&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{file_format:}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">KNWON_GRADIENTS</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">CONF_GRADIENTS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="c1"># merge configs to get default configs for energies and other targets</span>
+<span class="n">CONF_TARGET</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">CONF_TARGET_FIELDS</span><span class="p">,</span> <span class="n">CONF_GRADIENTS</span><span class="p">)</span>
+<span class="n">CONF_ENERGY</span> <span class="o">=</span> <span class="n">CONF_TARGET</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">CONF_ENERGY</span><span class="p">[</span><span class="s2">&quot;forces&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CONF_GRADIENT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">CONF_ENERGY</span><span class="p">[</span><span class="s2">&quot;stress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CONF_GRADIENT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="expand_dataset_config">
+<a class="viewcode-back" href="../../../../dev-docs/utils/omegaconf.html#metatensor.models.utils.omegaconf.expand_dataset_config">[docs]</a>
+<span class="k">def</span> <span class="nf">expand_dataset_config</span><span class="p">(</span><span class="n">conf</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DictConfig</span><span class="p">,</span> <span class="n">ListConfig</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ListConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Expands shorthand notations in a dataset configuration to its full format.</span>
+
+<span class="sd">    This function takes a dataset configuration, either as a :py:class:str,</span>
+<span class="sd">    :py:class:`omegaconf.DictConfig` or a :py:class:`omegaconf.ListConfig`, and expands</span>
+<span class="sd">    it into a detailed configuration format. It processes systems, targets, and gradient</span>
+<span class="sd">    sections, setting default values and inferring missing information. Unknown keys are</span>
+<span class="sd">    ignored, allowing for flexibility.</span>
+
+<span class="sd">    If the dataset configuration is either a :class:`str` or a</span>
+<span class="sd">    :class:`omegaconf.DictConfig`</span>
+
+<span class="sd">    The function performs the following steps for each config</span>
+
+<span class="sd">    - Merges and interpolates the input configuration with the base configurations.</span>
+<span class="sd">    - Expands shorthand notations like file paths or simple true/false settings to full</span>
+<span class="sd">      dictionary systems. This includes setting the units to the base units of</span>
+<span class="sd">      ``&quot;angstrom&quot;`` and ``&quot;eV&quot;``.</span>
+<span class="sd">    - Handles special cases, such as the mandatory nature of the &quot;energy&quot; section for MD</span>
+<span class="sd">      simulations and the mutual exclusivity of &#39;stress&#39; and &#39;virial&#39; sections.</span>
+<span class="sd">      Additionally the gradient sections for &quot;forces&quot; are enables by default.</span>
+
+<span class="sd">    :param conf: The dataset configuration, either as a file path string or a DictConfig</span>
+<span class="sd">        object.</span>
+<span class="sd">    :raises ValueError: If both ``virial`` and ``stress`` sections are enabled in the</span>
+<span class="sd">        &quot;energy&quot; target, as this is not permissible for training.</span>
+<span class="sd">    :returns: List of datasets configurations. If ``conf`` was a :class:`str` or a</span>
+<span class="sd">        :class:`omegaconf.DictConfig` the list contains only a single element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Expand str -&gt; DictConfig</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">read_from</span> <span class="o">=</span> <span class="n">conf</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;systems&quot;</span><span class="p">:</span> <span class="n">read_from</span><span class="p">,</span> <span class="s2">&quot;targets&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;energy&quot;</span><span class="p">:</span> <span class="n">read_from</span><span class="p">}}</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Expand DictConfig -&gt; ListConfig</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">DictConfig</span><span class="p">):</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="n">conf</span><span class="p">])</span>
+
+    <span class="c1"># Perform expansion per config inside the ListConfig</span>
+    <span class="k">for</span> <span class="n">conf_element</span> <span class="ow">in</span> <span class="n">conf</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">conf_element</span><span class="p">,</span> <span class="s2">&quot;systems&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_resolve_single_str</span><span class="p">(</span><span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">])</span>
+
+            <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+                <span class="n">CONF_SYSTEMS</span><span class="p">,</span> <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">conf_element</span><span class="p">,</span> <span class="s2">&quot;targets&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">target_key</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="n">_resolve_single_str</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+                <span class="c1"># for special case &quot;energy&quot; we enable sections for `forces` and `stress`</span>
+                <span class="c1"># gradients by default</span>
+                <span class="k">if</span> <span class="n">target_key</span> <span class="o">==</span> <span class="s2">&quot;energy&quot;</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">CONF_ENERGY</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">target</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">CONF_TARGET</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">target</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">target</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_key</span>
+
+                <span class="c1"># update DictConfig to allow for config node interpolation</span>
+                <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+
+                <span class="c1"># merge and interpolate possibly present gradients with default gradient</span>
+                <span class="c1"># config</span>
+                <span class="k">for</span> <span class="n">gradient_key</span><span class="p">,</span> <span class="n">gradient_conf</span> <span class="ow">in</span> <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span>
+                    <span class="n">target_key</span>
+                <span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">gradient_key</span> <span class="ow">in</span> <span class="n">KNWON_GRADIENTS</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">gradient_conf</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="n">gradient_conf</span> <span class="o">=</span> <span class="n">CONF_GRADIENT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">gradient_conf</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                            <span class="n">gradient_conf</span> <span class="o">=</span> <span class="n">_resolve_single_str</span><span class="p">(</span><span class="n">gradient_conf</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gradient_conf</span><span class="p">,</span> <span class="n">DictConfig</span><span class="p">):</span>
+                            <span class="n">gradient_conf</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+                                <span class="n">CONF_GRADIENT</span><span class="p">,</span> <span class="n">gradient_conf</span>
+                            <span class="p">)</span>
+
+                            <span class="k">if</span> <span class="n">gradient_conf</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">gradient_conf</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gradient_key</span>
+
+                            <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">][</span>
+                                <span class="n">gradient_key</span>
+                            <span class="p">]</span> <span class="o">=</span> <span class="n">gradient_conf</span>
+
+                <span class="c1"># If user sets the virial gradient and leaves the stress gradient</span>
+                <span class="c1"># untouched, we disable the by default enabled stress gradient section.</span>
+                <span class="n">base_stress_gradient_conf</span> <span class="o">=</span> <span class="n">CONF_GRADIENT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">base_stress_gradient_conf</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;stress&quot;</span>
+
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">target_key</span> <span class="o">==</span> <span class="s2">&quot;energy&quot;</span>
+                    <span class="ow">and</span> <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">][</span><span class="s2">&quot;virial&quot;</span><span class="p">]</span>
+                    <span class="ow">and</span> <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">][</span><span class="s2">&quot;stress&quot;</span><span class="p">]</span>
+                    <span class="o">==</span> <span class="n">base_stress_gradient_conf</span>
+                <span class="p">):</span>
+                    <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">][</span><span class="s2">&quot;stress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">][</span><span class="s2">&quot;stress&quot;</span><span class="p">]</span>
+                    <span class="ow">and</span> <span class="n">conf_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target_key</span><span class="p">][</span><span class="s2">&quot;virial&quot;</span><span class="p">]</span>
+                <span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Cannot perform training with respect to virials and stress &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;as in section </span><span class="si">{</span><span class="n">target_key</span><span class="si">}</span><span class="s2">. Set either `virials: off` or &quot;</span>
+                        <span class="s2">&quot;`stress: off`.&quot;</span>
+                    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">conf</span></div>
+
+
+
+<div class="viewcode-block" id="check_units">
+<a class="viewcode-back" href="../../../../dev-docs/utils/omegaconf.html#metatensor.models.utils.omegaconf.check_units">[docs]</a>
+<span class="k">def</span> <span class="nf">check_units</span><span class="p">(</span>
+    <span class="n">actual_options</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DictConfig</span><span class="p">,</span> <span class="n">ListConfig</span><span class="p">],</span>
+    <span class="n">desired_options</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DictConfig</span><span class="p">,</span> <span class="n">ListConfig</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform consistency checks between two dataset configs.</span>
+
+<span class="sd">    :param actual_options: The dataset options that you want to test.</span>
+<span class="sd">    :param desired_options: The dataset options ``actual_options`` is tested against.</span>
+
+<span class="sd">    :raises ValueError: If the length units are not consistent between</span>
+<span class="sd">        the system in the dataset options.</span>
+<span class="sd">    :raises ValueError: If a target is present only in desider_option and</span>
+<span class="sd">        not in actual_option.</span>
+<span class="sd">    :raises ValueError: If the unit of a target quantity is not consistent between</span>
+<span class="sd">        the dataset option.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">actual_options</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DictConfig</span><span class="p">:</span>
+        <span class="n">actual_options</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="n">actual_options</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">desired_options</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DictConfig</span><span class="p">:</span>
+        <span class="n">desired_options</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="n">desired_options</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual_options</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">desired_options</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Length of actual_options (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">actual_options</span><span class="p">)</span><span class="si">}</span><span class="s2">) and desired_options &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">desired_options</span><span class="p">)</span><span class="si">}</span><span class="s2">) is different!&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">actual_options_element</span><span class="p">,</span> <span class="n">desired_options_element</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="n">actual_options</span><span class="p">,</span>
+        <span class="n">desired_options</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">actual_length_unit</span> <span class="o">=</span> <span class="n">actual_options_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">][</span><span class="s2">&quot;length_unit&quot;</span><span class="p">]</span>
+        <span class="n">desired_length_unit</span> <span class="o">=</span> <span class="n">desired_options_element</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">][</span><span class="s2">&quot;length_unit&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">actual_length_unit</span> <span class="o">!=</span> <span class="n">desired_length_unit</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;`length_unit`s are inconsistent between one of the dataset options. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">actual_length_unit</span><span class="si">!r}</span><span class="s2"> != </span><span class="si">{</span><span class="n">desired_length_unit</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">actual_options_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">]:</span>
+            <span class="n">actual_unit</span> <span class="o">=</span> <span class="n">actual_options_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target</span><span class="p">][</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">desired_options_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">]:</span>
+                <span class="n">desired_unit</span> <span class="o">=</span> <span class="n">desired_options_element</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">][</span><span class="n">target</span><span class="p">][</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">actual_unit</span> <span class="o">!=</span> <span class="n">desired_unit</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Units of target </span><span class="si">{</span><span class="n">target</span><span class="si">!r}</span><span class="s2"> are inconsistent between one of &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;the dataset options. </span><span class="si">{</span><span class="n">actual_unit</span><span class="si">!r}</span><span class="s2"> != </span><span class="si">{</span><span class="n">desired_unit</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+                    <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Target </span><span class="si">{</span><span class="n">target</span><span class="si">!r}</span><span class="s2"> is not present in one of the given dataset &quot;</span>
+                    <span class="s2">&quot;options.&quot;</span>
+                <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="check_options_list">
+<a class="viewcode-back" href="../../../../dev-docs/utils/omegaconf.html#metatensor.models.utils.omegaconf.check_options_list">[docs]</a>
+<span class="k">def</span> <span class="nf">check_options_list</span><span class="p">(</span><span class="n">dataset_config</span><span class="p">:</span> <span class="n">ListConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform consistency checks within one dataset config.</span>
+
+<span class="sd">    This is useful if the dataset config is made of several datasets.</span>
+
+<span class="sd">    - The function checks if ``length_units`` in each system section are known and the</span>
+<span class="sd">       same.</span>
+<span class="sd">    - For unknown quantities a warning is given.</span>
+<span class="sd">    - If the names of the ``&quot;targets&quot;`` sections are the same between the elements of</span>
+<span class="sd">       the list of datasets also the units must be the same.</span>
+
+<span class="sd">    :param dataset_config: A List of configuration to be checked. In the list contains</span>
+<span class="sd">        only one element no checks are performed.</span>
+<span class="sd">    :raises ValueError: If for a known quantity the units are not known.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">desired_config</span> <span class="o">=</span> <span class="n">dataset_config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># save unit for each target seaction for later comparison</span>
+    <span class="n">unit_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">desired_config</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="n">desired_length_unit</span> <span class="o">=</span> <span class="n">desired_config</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">][</span><span class="s2">&quot;length_unit&quot;</span><span class="p">]</span>
+
+    <span class="c1"># loop over ALL configs because we have check units for all elements in</span>
+    <span class="c1"># `dataset_config`</span>
+    <span class="k">for</span> <span class="n">actual_config</span> <span class="ow">in</span> <span class="n">dataset_config</span><span class="p">:</span>
+        <span class="c1"># Perform consistency checks between config elements</span>
+        <span class="n">actual_length_unit</span> <span class="o">=</span> <span class="n">actual_config</span><span class="p">[</span><span class="s2">&quot;systems&quot;</span><span class="p">][</span><span class="s2">&quot;length_unit&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">actual_length_unit</span> <span class="o">!=</span> <span class="n">desired_length_unit</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;`length_unit`s are inconsistent between one of the dataset options.&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">actual_length_unit</span><span class="si">!r}</span><span class="s2"> != </span><span class="si">{</span><span class="n">desired_length_unit</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">target_key</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">actual_config</span><span class="p">[</span><span class="s2">&quot;targets&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+
+            <span class="c1"># If a target section name is not part of the saved units we add it for</span>
+            <span class="c1"># later comparison. We do not have to start the loop again because this</span>
+            <span class="c1"># target section name is not present in one of the datasets checked before.</span>
+            <span class="k">if</span> <span class="n">target_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">unit_dict</span><span class="p">[</span><span class="n">target_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit</span>
+
+            <span class="k">if</span> <span class="n">unit_dict</span><span class="p">[</span><span class="n">target_key</span><span class="p">]</span> <span class="o">!=</span> <span class="n">unit</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Units of target section </span><span class="si">{</span><span class="n">target_key</span><span class="si">!r}</span><span class="s2"> are inconsistent. Found &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">unit</span><span class="si">!r}</span><span class="s2"> and </span><span class="si">{</span><span class="n">unit_dict</span><span class="p">[</span><span class="n">target_key</span><span class="p">]</span><span class="si">!r}</span><span class="s2">!&quot;</span>
+                <span class="p">)</span></div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, metatensor-models developers
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-github fa-2x" href="https://github.com/lab-cosmo/metatensor-models" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=5c732492"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../../_static/toggleprompt.js?v=5801b3bb"></script>
+    </body>
+</html>
