@@ -172,6 +172,8 @@ class PhACE(torch.nn.Module):
         # these are meant to be modified from outside
         self.register_buffer("scalings", torch.ones((n_outputs,)))
 
+        self.last_layer_feature_size = self.k_max_l[0]
+
     def restart(self, dataset_info: DatasetInfo) -> "PhACE":
         # merge old and new dataset info
         merged_info = self.dataset_info.union(dataset_info)
