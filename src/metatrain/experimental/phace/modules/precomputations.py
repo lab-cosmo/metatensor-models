@@ -1,6 +1,57 @@
-import sphericart.torch
+# import sphericart.torch
 import torch
 from metatensor.torch import Labels, TensorBlock, TensorMap
+import math
+
+
+def _spherical_harmonics(lmax: int, x: torch.Tensor, y: torch.Tensor, z: torch.Tensor) -> torch.Tensor:
+    sh_0_0 = torch.ones_like(x)
+    if lmax == 0:
+        return torch.stack([
+            sh_0_0,
+        ], dim=-1)
+
+    sh_1_0 = x
+    sh_1_1 = y
+    sh_1_2 = z
+    if lmax == 1:
+        return torch.stack([
+            sh_0_0,
+            sh_1_0, sh_1_1, sh_1_2
+        ], dim=-1)
+
+    sh_2_0 = math.sqrt(3.0) * x * z
+    sh_2_1 = math.sqrt(3.0) * x * y
+    y2 = y.pow(2)
+    x2z2 = x.pow(2) + z.pow(2)
+    sh_2_2 = y2 - 0.5 * x2z2
+    sh_2_3 = math.sqrt(3.0) * y * z
+    sh_2_4 = math.sqrt(3.0) / 2.0 * (z.pow(2) - x.pow(2))
+
+    if lmax == 2:
+        return torch.stack([
+            sh_0_0,
+            sh_1_0, sh_1_1, sh_1_2,
+            sh_2_0, sh_2_1, sh_2_2, sh_2_3, sh_2_4
+        ], dim=-1)
+
+    sh_3_0 = math.sqrt(5.0 / 6.0) * (sh_2_0 * z + sh_2_4 * x)
+    sh_3_1 = math.sqrt(5.0) * sh_2_0 * y
+    sh_3_2 = math.sqrt(3.0 / 8.0) * (4.0 * y2 - x2z2) * x
+    sh_3_3 = 0.5 * y * (2.0 * y2 - 3.0 * x2z2)
+    sh_3_4 = math.sqrt(3.0 / 8.0) * z * (4.0 * y2 - x2z2)
+    sh_3_5 = math.sqrt(5.0) * sh_2_4 * y
+    sh_3_6 = math.sqrt(5.0 / 6.0) * (sh_2_4 * z - sh_2_0 * x)
+
+    if lmax == 3:
+        return torch.stack([
+            sh_0_0,
+            sh_1_0, sh_1_1, sh_1_2,
+            sh_2_0, sh_2_1, sh_2_2, sh_2_3, sh_2_4,
+            sh_3_0, sh_3_1, sh_3_2, sh_3_3, sh_3_4, sh_3_5, sh_3_6
+        ], dim=-1)
+    
+    raise ValueError(f"lmax={lmax} not supported")
 
 
 class Precomputer(torch.nn.Module):
@@ -8,9 +59,10 @@ class Precomputer(torch.nn.Module):
         super().__init__()
         self.spherical_harmonics_split_list = [(2 * l + 1) for l in range(l_max + 1)]
         self.normalize = normalize
-        self.spherical_harmonics_calculator = sphericart.torch.SphericalHarmonics(
-            l_max, normalized=True
-        )
+        # self.spherical_harmonics_calculator = sphericart.torch.SphericalHarmonics(
+        #     l_max, normalized=True
+        # )
+        self.l_max = l_max
 
     def forward(
         self,
@@ -35,9 +87,12 @@ class Precomputer(torch.nn.Module):
         bare_cartesian_vectors = cartesian_vectors.values.squeeze(dim=-1)
         r = torch.sqrt((bare_cartesian_vectors**2).sum(dim=-1))
 
-        spherical_harmonics = self.spherical_harmonics_calculator.compute(
-            bare_cartesian_vectors
-        )  # Get the spherical harmonics
+        xyz_normalized = bare_cartesian_vectors / r.unsqueeze(-1)
+        spherical_harmonics = _spherical_harmonics(self.l_max, xyz_normalized[..., 1], xyz_normalized[..., 2], xyz_normalized[..., 0])
+
+        # spherical_harmonics = self.spherical_harmonics_calculator.compute(
+        #     bare_cartesian_vectors
+        # )  # Get the spherical harmonics
         if self.normalize:
             spherical_harmonics = spherical_harmonics * (4.0 * torch.pi) ** (
                 0.5
