@@ -22,7 +22,7 @@ from ..utils.data import (
 from ..utils.errors import ArchitectureError
 from ..utils.evaluate_model import evaluate_model
 from ..utils.logging import MetricLogger
-from ..utils.metrics import RMSEAccumulator
+from ..utils.metrics import RMSEAccumulator, MAEAccumulator
 from ..utils.neighbor_lists import get_system_with_neighbor_lists
 from ..utils.omegaconf import expand_dataset_config
 from ..utils.per_atom import average_by_num_atoms
@@ -180,6 +180,7 @@ def _eval_targets(
 
     # Initialize RMSE accumulator:
     rmse_accumulator = RMSEAccumulator()
+    mae_accumulator = MAEAccumulator()
 
     # If we're returning the predictions, we need to store them:
     if return_predictions:
@@ -200,18 +201,22 @@ def _eval_targets(
             batch_targets, systems, per_structure_keys=[]
         )
         rmse_accumulator.update(batch_predictions, batch_targets)
+        mae_accumulator.update(batch_predictions, batch_targets)
         if return_predictions:
             all_predictions.append(batch_predictions)
 
-    # Finalize the RMSEs
+    # Finalize the RMSEs and MAEs
     rmse_values = rmse_accumulator.finalize(not_per_atom=["positions_gradients"])
+    mae_values = mae_accumulator.finalize()
+    
+    metrics = {**rmse_values, **mae_values}
     # print the RMSEs with MetricLogger
     metric_logger = MetricLogger(
         logobj=logger,
         dataset_info=model.capabilities(),
-        initial_metrics=rmse_values,
+        initial_metrics=metrics,
     )
-    metric_logger.log(rmse_values)
+    metric_logger.log(metrics)
 
     if return_predictions:
         # concatenate the TensorMaps

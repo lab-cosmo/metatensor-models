@@ -1,17 +1,30 @@
+seed: 2
+base_precision: 32
+device: cuda
+
 architecture:
-  name: experimental.soap_bpnn
+  name: experimental.phace
+  model:
+    nu_max: 4
+    n_message_passing_layers: 1
+    cutoff: 5.0
+    n_element_channels: 32
+    radial_basis:
+      mlp: true
+      type: physical
+      E_max: 50.0
   training:
-    batch_size: 2
-    num_epochs: 1
+    batch_size: 8
+    num_epochs: 100
 
 training_set:
   systems:
-    read_from: qm9_reduced_100.xyz
-    length_unit: angstrom
+    read_from: ethanol_reduced_100.xyz
+    # length_unit: angstrom
   targets:
     energy:
-      key: U0
-      unit: eV
+      key: energy
+      # unit: eV
 
-test_set: 0.5
-validation_set: 0.1
+test_set: 0.1
+validation_set: 0.5
